@@ -1,104 +1,64 @@
 <?php
-// require_once "./another.php";
-// require_once "./another.php";
-// require_once "./another.php";
 
-// echo date("Y");
-// $x = 10;
-// function sayHello(&$a)  {
-//     echo "Inside the func : $a<br>";
-//     $a = 100;
-// }
+$x = 10;
 
-// $a = 10;
-// echo "Outside the func : $a<br>";
-// sayHello($a);
+function test()  {
+    echo $GLOBALS["x"];
+}
 
-// echo "After Invoke the func : $a<br>";
+// test();
 
 
-// function test(string $name,Closure $func)  {
-    
-//     $func($name);
-// }
+// echo $_SERVER['PHP_SELF'] ."<br>";
+// echo $_SERVER['SERVER_NAME'] ."<br>";
+// echo $_SERVER['HTTP_HOST'] ."<br>";
+// echo $_SERVER['HTTP_USER_AGENT'] ."<br>";
+// echo $_SERVER['SCRIPT_NAME'] ."<br>";
 
-// test("Shahin",function ($n){
-//     echo "Name is $n";
-// });
+// echo $_SERVER['SERVER_PROTOCOL'] . "<br>";
 
-// $sum = function($a,$b){
-//     return $a + $b;
-// };
+// echo $_SERVER['REQUEST_METHOD'];
+$errors = [];
+if(isset($_REQUEST["btn"])){
 
-// $sum = fn ($a,$b) => $a + $b;
+    // if($_SERVER['REQUEST_METHOD'] == "POST"){
+    //     echo $_POST["name"];
+    // }
 
-// echo $sum(10,20);
+    $name = $_REQUEST["name"];
+    $password = $_REQUEST["password"];
 
+    if(empty($name)){
+        $errors["name"] = "Name is Empty";
+    }
+    if(empty($password)){
+        $errors["password"] = "Password is Empty";
+    }
 
-$arr = [10,20,30,40];
-
-// echo count($arr);
-
-// if(in_array(10,$arr)){
-//     echo "yes";
-// }else{
-//     echo "No";
-// }
-
-// echo array_sum($arr);
-
-// array_push($arr,50);
-
-// var_dump($arr);
-
-// array_pop($arr);
-
-// $b = array_reverse($arr);
-// var_dump($b);
-
-// $c = [200,300];
-
-// $d = array_merge($arr,$c);
-
-// var_dump($d);
-
-// $str = "ard";
-
-// echo md5($str);
-// $a = "My-name-is-shahin.jpg";
-// exit;
-// die;
-// $b = explode("-",$a);
-// var_dump(end($b));
-
-// var_dump(implode("===",$arr));
-
-// $name = "shahin vai";
-
-// echo ucwords($name);
-
-// json_decode();
+    if(!count($errors)){
+        echo "Send data in the DB";
+    }else{
+        echo "Validation Error!";
+        var_dump($errors);
+    }
+}
 
 
-// $str ="ssss";
-// $json = json_encode($arr);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
+    <input type="text" name="name"> <span style="color: red;"><?= $errors["name"] ?? "" ?></span> <br>
 
-// var_dump(json_decode($json));
+    <input type="password" name="password"> <span style="color: red;"><?= $errors["password"] ?? ""?></span> <br>
 
-// try{
-//     echo 10 / 0;
-// }catch(Exception $e){
-//     echo $e->getMessage();
-// }
-// catch(Exception $e){
-//     echo $e->getMessage();
-// }
-// finally{
-
-// }
-
-$name = "Shahin";
-
-session_start();
-
-$_SESSION["name"] = $name;
+    <button name="btn" type="submit">Submit</button>
+    </form>
+</body>
+</html>
