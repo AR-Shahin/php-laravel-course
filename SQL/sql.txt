@@ -1,0 +1,32 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    age INT,
+    salary DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE users ADD city VARCHAR(255)DEFAULT NULL :
+
+
+INSERT INTO users (name, email, age, salary) VALUES
+('Alice', 'alice@example.com', 25, 50000.00);
+
+
+INSERT INTO users (name, email, age, salary) VALUES
+('Alice1', 'alic1e@example.com', 25, 50000.00),
+('Bob', 'bob@example.com', 30, 60000.00),
+('Charlie', 'charlie@example.com', 35, 70000.00),
+('Alice', 'alice2@example.com', 28, 55000.00);
+
+
+
+ SELECT * FROM users;
+
+
+ UPDATE `users` SET `city` = 'Cumilla' WHERE `users`.`id` = 2;
+
+
+ SELECT * FROM users where name like "A%";
